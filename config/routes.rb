@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get "/stories" => "stories#index"
+  get "/stories/:id" => "stories#show"
+  post "/stories/" => "stories#create"
+  patch "/stories/:id" => "stories#update"
+  delete "/stories/:id" => "stories#destroy"
 end

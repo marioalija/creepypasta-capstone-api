@@ -1,7 +1,11 @@
 require "test_helper"
 
 class StoriesControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test "index" do
+    get "/stories.json"
+    assert_response 200
+
+    data = JSON.parse(response.body)
+    assert_equal Story.count, data.length
+  end
 end

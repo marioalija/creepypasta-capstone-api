@@ -1,2 +1,6 @@
-json.extract! story, :id, :created_at, :updated_at
-json.url story_url(story, format: :json)
+json.id story.id
+json.user_id story.user_id
+json.name story.name
+json.image story.image
+json.description story.description
+json.category story.category

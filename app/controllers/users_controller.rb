@@ -10,13 +10,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(
+    @user = User.new(
       name: params[:name],
       email: params[:email],
-      password_digest: params[:password_digest],
+      password: params[:password],
       image: params[:image],
     )
-    if user.save
+    if @user.save
       render json: { message: "User created successfully" }, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user.update(
       name: params[:name] || @user.name,
       email: params[:email] || @user.email,
-      password_digest: params[:password_digest] || @user.password_digest,
+      password: params[:password] || @user.password,
       image: params[:image] || @user.image,
     )
     render :show

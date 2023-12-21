@@ -1,4 +1,4 @@
 json.id comment.id
-json.user_id comment.user_id
-json.story_id comment.story_id
+json.user comment.user
+json.story comment.story
 json.body comment.body

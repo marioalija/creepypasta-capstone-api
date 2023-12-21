@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       email: params[:email],
       password: params[:password],
       image: params[:image],
+      story_id: params[:story_id],
     )
     if @user.save
       render json: { message: "User created successfully" }, status: :created
@@ -30,8 +31,13 @@ class UsersController < ApplicationController
       email: params[:email] || @user.email,
       password: params[:password] || @user.password,
       image: params[:image] || @user.image,
+      story_id: params[:story_id] || @user.story_id,
     )
-    render :show
+    if @user.valid? #happy path
+      render :show
+    else #sad path
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def destroy

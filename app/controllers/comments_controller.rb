@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.all
+    @comments = Comment.where(story_id: params[:story_id])
     # CHANGE THIS TO SHOW ONLY COMMENTs under a specific story
     render :index
   end

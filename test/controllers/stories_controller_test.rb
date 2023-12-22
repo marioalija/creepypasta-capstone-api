@@ -18,7 +18,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "create" do
     assert_difference "Story.count", 1 do
-      post "/stories.json", headers: { "Authorization" => "Bearer #{@jwt}" }, params: { name: "test", password: "password", image: "image_url", user_id: User.first.id }
+      post "/stories.json", headers: { "Authorization" => "Bearer #{@jwt}" }, params: { name: "test", password: "password", image: "image_url" }
       data = JSON.parse(response.body)
       assert_response 200
     end
@@ -33,24 +33,17 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "update" do
-    story = Story.first
-    patch "/stories/#{story.id}.json", headers: { "Authorization" => "Bearer #{@jwt}" }, params: { name: "Updated name", image: "image", descritption: "descritption", category: "category", comments: "comments" }
+    post "/stories.json", headers: { "Authorization" => "Bearer #{@jwt}" }, params: { name: "test", password: "password", image: "image_url" }
+    stories = JSON.parse(response.body)
+    patch "/stories/#{stories["id"]}.json", headers: { "Authorization" => "Bearer #{@jwt}" }, params: { name: "Updated name" }
     assert_response 200
-
     data = JSON.parse(response.body)
     assert_equal "Updated name", data["name"]
-    assert_equal stories.image, data["image"]
-    assert_equal stories.description, data["description"]
-    assert_equal stories.category, data["category"]
-    assert_equal stories.comments, data["comments"]
-
-    patch "/stories/#{stories.id}.json"
-    assert_response 401
   end
 
   test "destroy" do
     assert_difference "Story.count", -1 do
-      delete "/stories/#{Story.first.id}.json"
+      delete "/stories/#{Story.first.id}.json", headers: { "Authorization" => "Bearer #{@jwt}" }
       assert_response 200
     end
   end

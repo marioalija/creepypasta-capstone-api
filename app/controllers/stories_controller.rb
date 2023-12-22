@@ -8,7 +8,7 @@ class StoriesController < ApplicationController
 
   def create
     @story = Story.create(
-      user_id: params[:user_id],
+      user_id: current_user.id,
       name: params[:name],
       image: params[:image],
       description: params[:description],

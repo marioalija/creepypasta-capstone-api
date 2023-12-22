@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   def index
     @comments = Comment.all
+    # CHANGE THIS TO SHOW ONLY COMMENTs under a specific story
     render :index
   end
 
@@ -11,7 +12,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.create(
-      user_id: params[:user_id],
+      user_id: current_user.id,
       story_id: params[:story_id],
       body: params[:body],
     )

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get "/stories" => "stories#index"
+  get "/stories/current_stories" => "stories#current_stories"
   get "/stories/:id" => "stories#show"
-  post "/stories/" => "stories#create"
+  post "/stories" => "stories#create"
   patch "/stories/:id" => "stories#update"
   delete "/stories/:id" => "stories#destroy"
 

@@ -1,10 +1,15 @@
 class StoriesController < ApplicationController
-  before_action :authenticate_user, except: [:index, :show]
+  before_action :authenticate_user
 
   def index
     @stories = Story.all
     render :index
   end
+
+  # def current_stories
+  #   @stories = current_user.stories
+  #   render :current_stories
+  # end
 
   def create
     @story = Story.create(
